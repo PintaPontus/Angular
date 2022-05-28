@@ -1,0 +1,4 @@
+my-first-app/node_modules
+.git
+.gitignore
+my-first-app/dist
