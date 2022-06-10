@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angulartest-55eea": {
+      "hosting": {
+        "my-first-app": [
+          "angulartest-55eea"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angulartest-55eea"
+  }
+}
