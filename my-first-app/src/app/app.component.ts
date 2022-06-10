@@ -21,7 +21,7 @@ export class AppComponent {
     // @ts-ignore
     const collection = collection(this.firestore, 'items');
     this.items = collectionData(collection);
-    console.table(this.items);
+    this.items.subscribe(console.log);
   }
 
 }
