@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import {DocumentData} from "@angular/fire/compat/firestore";
+
 interface Item {
   name: string,
 };
@@ -13,15 +15,16 @@ interface Item {
 export class AppComponent {
   title = 'my-first-app';
 
-  items: Observable<Item[]> | undefined;
+  item$: Observable<DocumentData[]>;
 
-  constructor(private firestore: Firestore) {}
+  constructor(firestore: Firestore) {
+    const col = collection(firestore, 'items');
+    this.item$ = collectionData(col);
+    this.item$.subscribe(console.log);
+  }
 
   ngOnInit() {
-    // @ts-ignore
-    const collection = collection(this.firestore, 'items');
-    this.items = collectionData(collection);
-    this.items.subscribe(console.log);
+
   }
 
 }
