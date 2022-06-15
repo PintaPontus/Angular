@@ -26,7 +26,8 @@ import {FormsModule} from "@angular/forms";
     provideMessaging(() => getMessaging())
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,UserTrackingService,
+
   ],
   bootstrap: [AppComponent]
 })

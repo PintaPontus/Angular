@@ -5,6 +5,7 @@ import {DocumentData} from "@angular/fire/compat/firestore";
 import {Domanda} from "./domanda";
 import {Quiz} from "./quiz";
 import {NgForm} from "@angular/forms";
+import {AuthenticationService} from "./authentication.service";
 
 class Persona {
   constructor(private nome: string, private cognome: string) {}
@@ -29,7 +30,7 @@ export class AppComponent {
 
   @ViewChild('inputNome') inputNomeForm!: NgForm;
 
-  constructor(private firedb: Firestore) {
+  constructor(private firedb: Firestore, private authService: AuthenticationService) {
     const colNomi = collection(firedb, 'nomi');
     this.itemsNomi = collectionData(colNomi);
     const colDomande = collection(firedb, 'domanda');
@@ -80,5 +81,21 @@ export class AppComponent {
       this.addPersona(this.inputNomeForm.value.nome,
         this.inputNomeForm.value.cognome)
     }
+  }
+
+  signup() {
+    let emailInput = this.inputNomeForm.value.nome;
+    let passwordInput = this.inputNomeForm.value.cognome;
+    this.authService.signup(emailInput, passwordInput);
+  }
+
+  login(){
+    let emailInput = this.inputNomeForm.value.nome;
+    let passwordInput = this.inputNomeForm.value.cognome;
+    this.authService.login(emailInput, passwordInput);
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }
