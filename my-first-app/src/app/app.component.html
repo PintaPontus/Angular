@@ -11,11 +11,11 @@
           </li>
         </ul>
         <div>
-          <input type="text" id="nome" placeholder="Nome" [value]="nomeInput">
-          <input type="text" id="cognome" placeholder="Cognome" [value]="cognomeInput">
-          <button (click)="onAddPersona()">
-            CIAO
-          </button>
+          <form (ngSubmit)="onSubmit()" #inputNome="ngForm">
+            <input type="text" id="nome" name="nome" placeholder="Nome" [value]="nomeInput" ngModel required>
+            <input type="text" id="cognome" name="cognome" placeholder="Cognome" [value]="cognomeInput" ngModel required>
+            <button name="submit" type="submit">Aggiungi</button>
+          </form>
         </div>
       </div>
     </div>

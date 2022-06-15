@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Firestore, collectionData, collection, addDoc} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import {DocumentData} from "@angular/fire/compat/firestore";
 import {Domanda} from "./domanda";
 import {Quiz} from "./quiz";
+import {NgForm} from "@angular/forms";
 
 class Persona {
   constructor(private nome: string, private cognome: string) {}
@@ -22,9 +23,11 @@ export class AppComponent {
   itemsQuiz: Observable<DocumentData[]>;
   persone: Persona[] = [];
   domande: Domanda[] = [];
-  quiz: Quiz | undefined;
+  quiz: Quiz[] = [];
   nomeInput: string = "";
   cognomeInput: string = "";
+
+  @ViewChild('inputNome') inputNomeForm!: NgForm;
 
   constructor(private firedb: Firestore) {
     const colNomi = collection(firedb, 'nomi');
@@ -52,31 +55,30 @@ export class AppComponent {
     );
     this.itemsQuiz.subscribe(
       (data) => {
-        this.quiz = new Quiz([]);
+        this.quiz = [];
         for (const d of data) {
-          this.quiz.domande.push(<Domanda>d);
+          this.quiz.push(<Quiz>d);
+          //console.log(d);
         }
-        //console.log(this.quiz);
+        console.log(this.quiz);
       }
     );
   }
 
-  addPersona(nome: string, cognome: string) {
+  addPersona(nomeInput: string, cognomeInput: string) {
     addDoc(collection(this.firedb, "nomi"), {
-      nome: nome,
-      cognome: cognome
+      nome: nomeInput,
+      cognome: cognomeInput
     });
   }
 
   ngOnInit() {
-
   }
 
-  onAddPersona() {
-    // @ts-ignore
-    this.nomeInput = document.getElementById("nome").value;
-    // @ts-ignore
-    this.cognomeInput = document.getElementById("cognome").value;
-    this.addPersona(this.nomeInput, this.cognomeInput);
+  onSubmit() {
+    if(this.inputNomeForm.valid){
+      this.addPersona(this.inputNomeForm.value.nome,
+        this.inputNomeForm.value.cognome)
+    }
   }
 }

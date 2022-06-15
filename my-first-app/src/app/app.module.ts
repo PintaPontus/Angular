@@ -8,7 +8,8 @@ import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideMessaging,getMessaging } from '@angular/fire/messaging'
+import { provideMessaging,getMessaging } from '@angular/fire/messaging';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging'
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
