@@ -13,29 +13,11 @@ import {AuthenticationService} from "./authentication.service";
 export class AppComponent {
     title = 'my-first-app';
 
-    @ViewChild('inputCredentials') inputCredentials!: NgForm;
-
     constructor(private firedb: Firestore, private authService: AuthenticationService) {
 
     }
 
     ngOnInit() {
 
-    }
-
-    signup() {
-        let emailInput = this.inputCredentials.value.nome;
-        let passwordInput = this.inputCredentials.value.cognome;
-        this.authService.signup(emailInput, passwordInput);
-    }
-
-    login() {
-        let emailInput = this.inputCredentials.value.nome;
-        let passwordInput = this.inputCredentials.value.cognome;
-        this.authService.login(emailInput, passwordInput);
-    }
-
-    logout() {
-        this.authService.logout();
     }
 }

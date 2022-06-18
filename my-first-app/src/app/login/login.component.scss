@@ -1,0 +1,27 @@
+.login-card {
+    color: black;
+    background: linear-gradient(blue, lime);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 50vh;
+    text-align: center;
+}
+
+.login-container {
+    height: 100vh;
+}
+
+.text-field {
+    padding: 1vh;
+}
+
+.form-control {
+    border-color: rgba(0, 0, 0, 0.3);
+    border-width: 0.5px;
+}
+
+button.form-control:hover {
+    background-color: rgba(200, 200, 200, 0.8);
+}

@@ -1,0 +1,24 @@
+<div class="container ">
+    <div class="row login-card">
+        <h1>
+            LOGIN
+        </h1>
+        <div class="col-md-12">
+            <form #inputCredentials="ngForm" (ngSubmit)="login()">
+                <div class="text-field">
+                    <input class="form-control" id="mail" name="mail" ngModel placeholder="Email" required type="text">
+                </div>
+                <div class="text-field">
+                    <input class="form-control" id="password" name="password" ngModel placeholder="Password" required
+                           type="text">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <button (click)="signup()" class="form-control">SIGNUP</button>
+        </div>
+        <div class="col-md-6">
+            <button (click)="login()" class="form-control">LOGIN</button>
+        </div>
+    </div>
+</div>

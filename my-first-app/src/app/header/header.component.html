@@ -1,0 +1,12 @@
+<div class="row header-content justify-content-center align-content-center">
+    <div class="col-md-1 text-center">
+        <img [src]="logoUrl" alt="" class="img-fluid header-logo">
+    </div>
+    <div class="col-md-9">
+        SEZIONI
+    </div>
+    <div class="col-md-2">
+        <div *ngIf="username">Benvenuto {{ username }}</div>
+        <div *ngIf="!username"><a routerLink="/login">LOGIN</a></div>
+    </div>
+</div>
