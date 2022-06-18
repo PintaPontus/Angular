@@ -5,68 +5,37 @@ import {DocumentData} from "@angular/fire/compat/firestore";
 import {NgForm} from "@angular/forms";
 import {AuthenticationService} from "./authentication.service";
 
-class Persona {
-  constructor(private nome: string, private cognome: string) {}
-}
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-first-app';
+    title = 'my-first-app';
 
-  itemsNomi: Observable<DocumentData[]>;
-  persone: Persona[] = [];
-  nomeInput: string = "";
-  cognomeInput: string = "";
+    @ViewChild('inputCredentials') inputCredentials!: NgForm;
 
-  @ViewChild('inputNome') inputNomeForm!: NgForm;
+    constructor(private firedb: Firestore, private authService: AuthenticationService) {
 
-  constructor(private firedb: Firestore, private authService: AuthenticationService) {
-    const colNomi = collection(firedb, 'nomi');
-    this.itemsNomi = collectionData(colNomi);
-    this.itemsNomi.subscribe(
-      (data) => {
-        this.persone = [];
-        for (const d of data) {
-          this.persone.push(new Persona(d['nome'], d['cognome']));
-        }
-      }
-    );
-  }
-
-  addPersona(nomeInput: string, cognomeInput: string) {
-    addDoc(collection(this.firedb, "nomi"), {
-      nome: nomeInput,
-      cognome: cognomeInput
-    });
-  }
-
-  ngOnInit() {
-  }
-
-  onSubmit() {
-    if(this.inputNomeForm.valid){
-      this.addPersona(this.inputNomeForm.value.nome,
-        this.inputNomeForm.value.cognome)
     }
-  }
 
-  signup() {
-    let emailInput = this.inputNomeForm.value.nome;
-    let passwordInput = this.inputNomeForm.value.cognome;
-    this.authService.signup(emailInput, passwordInput);
-  }
+    ngOnInit() {
 
-  login(){
-    let emailInput = this.inputNomeForm.value.nome;
-    let passwordInput = this.inputNomeForm.value.cognome;
-    this.authService.login(emailInput, passwordInput);
-  }
+    }
 
-  logout(){
-    this.authService.logout();
-  }
+    signup() {
+        let emailInput = this.inputCredentials.value.nome;
+        let passwordInput = this.inputCredentials.value.cognome;
+        this.authService.signup(emailInput, passwordInput);
+    }
+
+    login() {
+        let emailInput = this.inputCredentials.value.nome;
+        let passwordInput = this.inputCredentials.value.cognome;
+        this.authService.login(emailInput, passwordInput);
+    }
+
+    logout() {
+        this.authService.logout();
+    }
 }
