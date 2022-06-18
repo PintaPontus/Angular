@@ -13,6 +13,7 @@ export class AuthenticationService {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential);
+        console.log(getAuth());
         const user = userCredential.user;
         // ...
       })
@@ -28,6 +29,7 @@ export class AuthenticationService {
       .then((userCredential) => {
       // Signed in
       console.log(userCredential);
+      console.log(getAuth());
       const user = userCredential.user;
       // ...
     })
@@ -38,7 +40,12 @@ export class AuthenticationService {
       });
   }
   logout() {
-    signOut(getAuth()).then(console.log).catch(console.log)
+    signOut(getAuth()).then(
+      console.log
+    ).catch(
+      console.log
+    )
+    console.log(getAuth());
   }
 }
 
