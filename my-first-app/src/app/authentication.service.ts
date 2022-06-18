@@ -6,6 +6,7 @@ import {
     signOut,
     UserCredential
 } from "firebase/auth";
+import {Subject} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -17,45 +18,32 @@ export class AuthenticationService {
     constructor() {
     }
 
-    signup(email: string, password: string) {
-        console.log('CREATE USER');
-        console.log('email' + email);
-        console.log('password' + password);
+    signup(email: string, password: string): Subject<boolean> {
+        const success = new Subject<boolean>();
         createUserWithEmailAndPassword(getAuth(), email, password)
             .then((userCredential) => {
-                // Signed in
-                //console.log(userCredential);
                 this.userCredential = userCredential;
-                //console.log(getAuth());
-                const user = userCredential.user;
-                // ...
+                success.next(true);
             })
             .catch((error) => {
                 console.log(error);
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
+                success.next(false);
             });
+        return success;
     }
 
-    login(email: string, password: string) {
-        console.log('LOGIN USER');
-        console.log('email' + email);
-        console.log('password' + password);
+    login(email: string, password: string): Subject<boolean> {
+        const success = new Subject<boolean>();
         signInWithEmailAndPassword(getAuth(), email, password)
             .then((userCredential) => {
-                // Signed in
-                //console.log(userCredential);
                 this.userCredential = userCredential;
-                //console.log(getAuth());
-                const user = userCredential.user;
-                // ...
+                success.next(true);
             })
             .catch((error) => {
                 console.log(error);
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                success.next(false);
             });
+        return success;
     }
 
     logout() {

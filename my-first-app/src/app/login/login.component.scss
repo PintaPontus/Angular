@@ -1,5 +1,7 @@
 .login-card {
     color: black;
+    border-radius: 2vh;
+    border: 3px yellow solid;
     background: linear-gradient(blue, lime);
     position: absolute;
     top: 50%;
@@ -7,6 +9,10 @@
     transform: translate(-50%, -50%);
     min-height: 50vh;
     text-align: center;
+}
+
+.login-error {
+    border: 3px red solid;
 }
 
 .login-container {
@@ -20,6 +26,10 @@
 .form-control {
     border-color: rgba(0, 0, 0, 0.3);
     border-width: 0.5px;
+}
+
+input.form-control:focus {
+    border: 3px yellow solid;
 }
 
 button.form-control:hover {

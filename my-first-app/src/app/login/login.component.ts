@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Firestore} from "@angular/fire/firestore";
 import {AuthenticationService} from "../authentication.service";
+import {observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'pinta-login',
@@ -13,7 +15,9 @@ export class LoginComponent implements OnInit {
 
     @ViewChild('inputCredentials') inputCredentials!: NgForm;
 
-    constructor(private firedb: Firestore, private authService: AuthenticationService) {
+    public loginError: boolean = false;
+
+    constructor(private authService: AuthenticationService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -22,13 +26,24 @@ export class LoginComponent implements OnInit {
     signup() {
         let emailInput = this.inputCredentials.value.mail;
         let passwordInput = this.inputCredentials.value.password;
-        this.authService.signup(emailInput, passwordInput);
+        this.authService.signup(emailInput, passwordInput).subscribe((success) => {
+            this.loginError = !success;
+            if (success) {
+                this.router.navigate(['']);
+            }
+        });
     }
+
 
     login() {
         let emailInput = this.inputCredentials.value.mail;
         let passwordInput = this.inputCredentials.value.password;
-        this.authService.login(emailInput, passwordInput);
+        this.authService.login(emailInput, passwordInput).subscribe((success) => {
+            this.loginError = !success;
+            if (success) {
+                this.router.navigate(['']);
+            }
+        });
     }
 
     logout() {
