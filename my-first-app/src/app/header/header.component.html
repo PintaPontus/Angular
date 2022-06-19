@@ -1,12 +1,20 @@
 <div class="row header-content justify-content-center align-content-center">
     <div class="col-md-1 text-center">
-        <img [src]="logoUrl" alt="" class="img-fluid header-logo">
+        <a routerLink="/">
+            <img [src]="logoUrl" alt="" class="img-fluid header-logo">
+        </a>
     </div>
     <div class="col-md-9">
         SEZIONI
     </div>
     <div class="col-md-2 text-center">
-        <div *ngIf="username">Benvenuto {{ username }}</div>
-        <div *ngIf="!username"><a routerLink="/login">LOGIN</a></div>
+        <div *ngIf="!isLoggingIn">
+            <div *ngIf="isLoggedIn()">
+                <a routerLink="/user">Benvenuto {{ username }}</a>
+            </div>
+            <div *ngIf="!isLoggedIn()">
+                <a routerLink="/login">LOGIN</a>
+            </div>
+        </div>
     </div>
 </div>

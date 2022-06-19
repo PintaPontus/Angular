@@ -1,0 +1,17 @@
+<pinta-header></pinta-header>
+<div class="main-content">
+    Pagina Utente
+    <form #inputUserInfo="ngForm" (ngSubmit)="updateProfile()">
+        <div class="text-field">
+            <input
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="UserName"
+                [(ngModel)]="userCredentials.displayName"
+                ngModel
+                type="text">
+        </div>
+        <button (click)="updateProfile()" type="button" class="form-control">Update</button>
+    </form>
+</div>

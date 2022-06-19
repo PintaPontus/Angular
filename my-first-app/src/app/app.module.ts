@@ -13,13 +13,15 @@ import {FormsModule} from "@angular/forms";
 import {LoginComponent} from './login/login.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {HeaderComponent} from './header/header.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         HomepageComponent,
-        HeaderComponent
+        HeaderComponent,
+        UserProfileComponent
     ],
     imports: [
         BrowserModule,

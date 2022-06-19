@@ -7,6 +7,8 @@ import {
     UserCredential
 } from "firebase/auth";
 import {Subject} from "rxjs";
+import {updateProfile} from "@angular/fire/auth";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Injectable({
     providedIn: 'root'
@@ -43,6 +45,7 @@ export class AuthenticationService {
                 console.log(error);
                 success.next(false);
             });
+        console.log(getAuth())
         return success;
     }
 
@@ -56,6 +59,19 @@ export class AuthenticationService {
                 const errorCode = error.code;
                 const errorMessage = error.message;
             })
+    }
+
+    isLoggedIn() {
+        return this.userCredential !== undefined;
+    }
+
+    updateProfile(param: { displayName: string, photoURL: string }) {
+        updateProfile(getAuth().currentUser!, param)
+            .then(() => {
+                console.log('updateProfile success');
+            }).catch((error) => {
+                console.log(error);
+            });
     }
 }
 

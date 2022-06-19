@@ -3,7 +3,7 @@ import {Firestore, collectionData, collection, addDoc} from '@angular/fire/fires
 import { Observable } from 'rxjs';
 import {DocumentData} from "@angular/fire/compat/firestore";
 import {NgForm} from "@angular/forms";
-import {AuthenticationService} from "./authentication.service";
+import {AuthenticationService} from "./services/authentication.service";
 
 @Component({
     selector: 'app-root',
