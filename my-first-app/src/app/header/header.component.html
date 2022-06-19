@@ -10,7 +10,7 @@
     <div class="col-md-2 text-center">
         <div *ngIf="!isLoggingIn">
             <div *ngIf="isLoggedIn()">
-                <a routerLink="/user">Benvenuto {{ username }}</a>
+                <a routerLink="/user">Benvenuto {{ getUsername() }}</a>
             </div>
             <div *ngIf="!isLoggedIn()">
                 <a routerLink="/login">LOGIN</a>

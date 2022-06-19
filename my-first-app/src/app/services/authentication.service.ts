@@ -15,8 +15,6 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 })
 export class AuthenticationService {
 
-    userCredential: UserCredential | undefined;
-
     constructor() {
     }
 
@@ -24,7 +22,6 @@ export class AuthenticationService {
         const success = new Subject<boolean>();
         createUserWithEmailAndPassword(getAuth(), email, password)
             .then((userCredential) => {
-                this.userCredential = userCredential;
                 success.next(true);
             })
             .catch((error) => {
@@ -38,7 +35,6 @@ export class AuthenticationService {
         const success = new Subject<boolean>();
         signInWithEmailAndPassword(getAuth(), email, password)
             .then((userCredential) => {
-                this.userCredential = userCredential;
                 success.next(true);
             })
             .catch((error) => {
@@ -52,7 +48,7 @@ export class AuthenticationService {
     logout() {
         signOut(getAuth())
             .then(() => {
-                this.userCredential = undefined;
+                console.log('logout success');
             })
             .catch((error) => {
                 console.log(error);
@@ -62,7 +58,11 @@ export class AuthenticationService {
     }
 
     isLoggedIn() {
-        return this.userCredential !== undefined;
+        return getAuth().currentUser !== null;
+    }
+
+    getUser(){
+        return getAuth().currentUser;
     }
 
     updateProfile(param: { displayName: string, photoURL: string }) {

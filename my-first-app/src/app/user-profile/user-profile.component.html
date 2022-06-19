@@ -8,7 +8,7 @@
                 id="username"
                 name="username"
                 placeholder="UserName"
-                [(ngModel)]="userCredentials.displayName"
+                [ngModel]="getUser()!.providerData[0].displayName"
                 ngModel
                 type="text">
         </div>
