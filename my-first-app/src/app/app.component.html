@@ -1,29 +1,7 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>
-        Benvenuto Utente
-      </h1>
-      <div>
-        <ul>
-          <li *ngFor="let p of persone">
-            <div [innerText]="p['nome'] + ' ' + p['cognome']"></div>
-          </li>
-        </ul>
-        <div>
-          <form (ngSubmit)="onSubmit()" #inputNome="ngForm">
-            <input type="text" id="nome" name="nome" placeholder="Nome" [value]="nomeInput" ngModel required>
-            <input type="text" id="cognome" name="cognome" placeholder="Cognome" [value]="cognomeInput" ngModel required>
-            <button name="submit" type="submit">Aggiungi</button>
-          </form>
+    <div class="row">
+        <div class="col-md-12">
+            <router-outlet></router-outlet>
         </div>
-        <div>
-          <h2>Login</h2>
-          <button (click)="signup()">SIGNUP</button>
-          <button (click)="login()">LOGIN</button>
-          <button (click)="logout()">LOGOUT</button>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
