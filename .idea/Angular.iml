@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/my-first-app/dist" />
       <excludeFolder url="file://$MODULE_DIR$/my-first-app/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/my-first-app/.angular/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
